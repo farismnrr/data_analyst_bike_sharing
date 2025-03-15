@@ -1,0 +1,49 @@
+import pandas as pd
+
+# 1. Memuat Data
+# Karena kita ingin menganalisis pola per jam dan harian, kita muat kedua dataset.
+hourly_data = pd.read_csv("hour.csv")
+daily_data = pd.read_csv("day.csv")
+
+# 2.  Preprocessing Singkat sebelum Penggabungan (optional, tapi best practice)
+#    -  Ubah 'dteday' ke tipe datetime: Ini penting agar pandas tahu ini adalah tanggal.
+hourly_data['dteday'] = pd.to_datetime(hourly_data['dteday'])
+daily_data['dteday'] = pd.to_datetime(daily_data['dteday'])
+
+#    - Cek nama kolom:  Pastikan nama kolom sama persis sebelum di-join.
+print(hourly_data.columns)
+print(daily_data.columns)
+#    -  Kolom 'hr' tidak ada di day.csv,  tapi karena kita ingin data agregat harian
+#      dan detail per jam, kita akan tinggalkan ini untuk analisis terpisah nanti.
+
+# 3. Penggabungan Data (Join)
+#    Karena data harian merupakan agregasi dari data per jam, kita tidak perlu
+#    melakukan join "langsung" (seperti INNER JOIN). Lebih tepatnya, kita analisis
+#    keduanya secara terpisah atau melakukan agregasi pada data per jam untuk
+#    mendapatkan metrik harian jika diperlukan.
+#   *TIDAK ADA JOIN ANTARA hour.csv dan day.csv*
+
+# 4.  Persiapan untuk Analisis (Contoh)
+#     Kita akan persiapkan beberapa data yang sudah di-load untuk analisis lanjutan.
+#     Misalnya, kita tambahkan kolom-kolom yang mungkin berguna.
+
+# Tambahkan kolom untuk nama hari (e.g., "Monday")
+hourly_data['day_name'] = hourly_data['dteday'].dt.day_name()
+daily_data['day_name'] = daily_data['dteday'].dt.day_name()
+
+#Tambahkan kolom turunan yang mengkombinasikan bulan dan tahun. Ini berguna
+#jika kita ingin melihat tren bulanan sepanjang dua tahun.
+hourly_data['year_month'] = hourly_data['dteday'].dt.to_period('M')
+daily_data['year_month'] = daily_data['dteday'].dt.to_period('M')
+
+# Contoh: Menampilkan beberapa baris pertama setelah preprocessing
+print("Data per Jam (5 baris pertama):")
+print(hourly_data.head())
+print("\nData Harian (5 baris pertama):")
+print(daily_data.head())
+
+# --- Data siap untuk tahap wrangling selanjutnya (Cleaning, Transformation, etc.) ---
+
+# Simpan dataframe yang telah diproses ke dalam variabel baru (opsional).
+hourly_data_gathered = hourly_data
+daily_data_gathered = daily_data
