@@ -9,7 +9,7 @@ docker run -d -p 8501:8501 --name streamlit-bike-sharing farismnrr/streamlit-bik
 ### Open Browser
 Url: http://localhost:8501/
 
-## Run File Manual
+## Run via Manual
 ### Setup Environment - Anaconda
 
 ```bash
