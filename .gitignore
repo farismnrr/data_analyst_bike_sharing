@@ -1,4 +1,2 @@
 .config
 /files
-.gitignore
-merge_dataset.py
