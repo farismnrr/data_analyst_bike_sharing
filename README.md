@@ -26,8 +26,8 @@ pip install -r requirements.txt
 	
 ### Setup Environment - Shell/Terminal
 ```bash
-mkdir Proyek-Analisis-Data-Dicoding
-cd Proyek-Analisis-Data-Dicoding
+mkdir data_analyst_bike_sharing-main
+cd data_analyst_bike_sharing-main
 ```
 
 ```bash	
