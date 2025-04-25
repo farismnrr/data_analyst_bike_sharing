@@ -41,7 +41,7 @@ pip install -r requirements.txt
 
 ### Run streamlit app
 ```bash	
-streamlit run dashboard.py
+streamlit run dashboards/dashboard.py
 ```
 
 ### Open Browser
